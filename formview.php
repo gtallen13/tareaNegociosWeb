@@ -1,13 +1,12 @@
 <?php
 require_once 'businesslogic.php';
-
+$txtID = "";
 $txtArtista = "";
 $txtNombre = "";
 $txtCancion = "";
 $txtAlbum = "";
 $txtNacionalidad = "";
 $txtNacimiento = "";
-$txtAlbum = "";
 $txtNacionalidad = "";
 
 $actionText = "Confirmar";
@@ -22,21 +21,22 @@ $modeDesc = array(
 );
 
 // Get
-if (isset($_GET["cuenta"])) {
-    if ($_GET["cuenta"] != "na") {
-        $txtCuenta = $_GET["cuenta"];
+if (isset($_GET["ID"])) {
+    if ($_GET["ID"] != "na") {
+        $txtID = $_GET["ID"];
     }
     $mode = $_GET["mode"];
 }
 // Post
 if (isset($_POST["btnPrimario"])) {
     $mode = $_POST["mode"];
-    $txtID = $_POST["txtID"]
+    $txtID = $_POST["txtID"];
     $txtArtista = $_POST["txtArtista"];
     $txtNombre = $_POST["txtNombre"];
     $txtCancion = $_POST["txtCancion"];
     $txtAlbum = $_POST["txtAlbum"];
     $txtNacionalidad = $_POST["txtNacionalidad"];
+    $txtNacimiento = $_POST["txtNacimiento"];
     // Validaciones
 
     //Determinar que accion tomar
@@ -47,12 +47,12 @@ if (isset($_POST["btnPrimario"])) {
             }
             break;
         case "UPD":
-            if (actualizarRegistro($txtArtista, $txtNombre, $txtCancion, $txtAlbum, $txtNacionalidad, $txtNacimiento)) {
+            if (actualizarRegistro($txtID,$txtArtista, $txtNombre, $txtCancion, $txtAlbum, $txtNacionalidad, $txtNacimiento)) {
                 irAListaConMensaje("Registro actualizado Satisfactoriamente.", "listview.php");
             }
             break;
         case "DEL";
-            if (eliminarRegistro($txtCuenta)) {
+            if (eliminarRegistro($txtID)) {
                 irAListaConMensaje("Registro eliminado Satisfactoriamente.", "listview.php");
             }
             break;
@@ -62,15 +62,17 @@ if (isset($_POST["btnPrimario"])) {
 if (isset($modeDesc[$mode])) {
     if ($mode != "INS") {
         // Sacar de la DB el valor de la cuenta
-        $tmpAlumno = obtenerRegistro($txtCuenta);
+        $tmpAlumno = obtenerRegistro($txtID);
         if (count($tmpAlumno) == 0) {
             irALista();
         }
+        $txtArtista = $tmpAlumno["ARTISTA"];
         $txtNombre = $tmpAlumno["NOMBRE"];
-        $txtCancion = $tmpAlumno["CARRERA"];
-        $txtAlbum = $tmpAlumno["CAMPUS"];
-        $txtNacionalidad = $tmpAlumno["BECAS"];
-        $titleText = sprintf($modeDesc[$mode], $txtCuenta, $txtNombre);
+        $txtCancion = $tmpAlumno["CANCION"];
+        $txtAlbum = $tmpAlumno["ALBUM"];
+        $txtNacionalidad = $tmpAlumno["NACIONALIDAD"];
+        $txtNacimiento = $tmpAlumno["NACIMIENTO"];
+        $titleText = sprintf($modeDesc[$mode], $txtID, $txtArtista);
 
         if ($mode == 'DSP' || $mode == 'DEL') {
             $readonly = "readonly disabled";
@@ -87,12 +89,12 @@ if (isset($modeDesc[$mode])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trabajar con Alumnos</title>
+    <title>Artistas</title>
 </head>
 
 <body>
     <header>
-        <h1>Trabajar con Alumnos</h1>
+        <h1>Artistas</h1>
     </header>
     <main>
         <section>
@@ -104,23 +106,18 @@ if (isset($modeDesc[$mode])) {
                 <input type="hidden" name="mode" id="mode" value="<?php echo $mode; ?>" />
                 <label for="txtID">ID</label>
                 <?php if ($mode !== "INS") {
-                ?>
-                    <input type="hidden" name="txtCuenta" id="txtCuenta" value="<?php echo $txtCuenta; ?>" placeholder="Cuenta" />
-                    <span><?php echo $txtCuenta; ?></span>
+                    ?>
+                    <input type="hidden" name="txtID" id="txtID" value="<?php echo $txtID; ?>" placeholder="Cuenta" />
+                    <span><?php echo $txtID; ?></span>
                     <br />
                 <?php
-                } else {
-                ?>
-                    <input type="text" name="txtCuenta" id="txtCuenta" value="<?php echo $txtCuenta; ?>" placeholder="Cuenta" /> <br />
-                <?php
-                }
-                ?>
-                <label for="txtArtista">Artista</label><input <?php echo $readonly; ?> type="text" name="txtArtista" id="txtArtista" value="<?php echo $txtArtista; ?>" placeholder="Nombre" /> <br />
-                <label for="txtNombre">Nombre</label><input <?php echo $readonly; ?> type="text" name="txtNombre" id="txtNombre" value="<?php echo $txtNombre; ?>" placeholder="Nombre" /> <br />
-                <label for="txtCancion">Carrera</label><input <?php echo $readonly; ?> type="text" name="txtCancion" id="txtCancion" value="<?php echo $txtCancion; ?>" placeholder="Carrera" /> <br />
-                <label for="txtAlbum">Campus</label><input <?php echo $readonly; ?> type="text" name="txtAlbum" id="txtAlbum" value="<?php echo $txtAlbum; ?>" placeholder="Campus" /> <br />
-                <label for="txtNacionalidad">Becas</label><input <?php echo $readonly; ?> type="text" name="txtNacionalidad" id="txtNacionalidad" value="<?php echo $txtNacionalidad; ?>" placeholder="Becas" /> <br />
-                <label for="txtNacimiento">Becas</label><input <?php echo $readonly; ?> type="text" name="txtNacimiento" id="txtNacimiento" value="<?php echo $txtNacimiento; ?>" placeholder="Becas" /> <br />
+                } ?>
+                <label for="txtArtista">Artista</label><input required <?php echo $readonly; ?> type="text" name="txtArtista" id="txtArtista" value="<?php echo $txtArtista; ?>" placeholder="Nombre" /> <br />
+                <label for="txtNombre">Nombre</label><input required <?php echo $readonly; ?> type="text" name="txtNombre" id="txtNombre" value="<?php echo $txtNombre; ?>" placeholder="Nombre" /> <br />
+                <label for="txtCancion">Cancion</label><input required <?php echo $readonly; ?> type="text" name="txtCancion" id="txtCancion" value="<?php echo $txtCancion; ?>" placeholder="Carrera" /> <br />
+                <label for="txtAlbum">Album</label><input required <?php echo $readonly; ?> type="text" name="txtAlbum" id="txtAlbum" value="<?php echo $txtAlbum; ?>" placeholder="Campus" /> <br />
+                <label for="txtNacionalidad">Nacionalidad</label><input required <?php echo $readonly; ?> type="text" name="txtNacionalidad" id="txtNacionalidad" value="<?php echo $txtNacionalidad; ?>" placeholder="Becas" /> <br />
+                <label for="txtNacimiento">Nacimiento</label><input required <?php echo $readonly; ?> type="text" name="txtNacimiento" id="txtNacimiento" value="<?php echo $txtNacimiento; ?>" placeholder="Becas" /> <br />
                 <?php
                 if ($mode != 'DSP') {
                 ?>

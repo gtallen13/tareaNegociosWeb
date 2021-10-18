@@ -1,10 +1,10 @@
 <?php
 require_once 'businesslogic.php';
+$txtArtista = "";
 $txtNombre = "";
-$txtCuenta = "";
-$txtCarrera = "";
+$txtNacionalidad = "";
 
-$alumnos = getRegistros();
+$artistas = getRegistros();
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,48 +12,52 @@ $alumnos = getRegistros();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trabajar con Alumnos</title>
+    <title>Artistas</title>
 </head>
 
 <body>
     <header>
-        <h1>Trabajar con Alumnos
+        <h1>Artistas</h1>
     </header>
     <main>
         <section>
             <form action="listview.php" method="post">
-                <label for="txtCuenta">Cuenta</label><input type="text" name="txtCuenta" id="txtCuenta" value="<?php echo $txtCuenta; ?>" placeholder="Filtro por Cuenta" /> <br />
-                <label for="txtNombre">Nombre</label><input type="text" name="txtNombre" id="txtNombre" value="<?php echo $txtNombre; ?>" placeholder="Filtrar por Nombre" /> <br />
-                <label for="txtCarrera">Carrera</label><input type="text" name="txtCarrera" id="txtCarrera" value="<?php echo $txtCarrera; ?>" placeholder="Filtro por Carrera" /> <br />
+                <label for="txtArtista">Artista</label><input type="text" name="txtArtista" id="txtArtista" value="<?php echo $txtArtista; ?>" placeholder="Polache" /> <br />
+                <label for="txtNombre">Nombre</label><input type="text" name="txtNombre" id="txtNombre" value="<?php echo $txtNombre; ?>" placeholder="Juan Gonzales" /> <br />
+                <label for="txtNacionalidad">Nacionalidad</label><input type="text" name="txtNacionalidad" id="txtNacionalidad" value="<?php echo $txtNacionalidad; ?>" placeholder="Hondureño" /> <br />
                 <button name="btnFiltrar">Filtrar</button>
             </form>
         </section>
         <section>
-            <h2>Alumnos</h2>
+            <h2>Artistas</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>Cuenta</th>
-                        <th>Nombre</th>
-                        <th>Carrera</th>
-                        <th>Campus</th>
-                        <th>Beca</th>
-                        <th><a href="formview.php?cuenta=na&mode=INS">Registrar</a></th>
+                        <th>ID</th>
+                        <th>Artista</th>
+                        <th>Nombre Real</th>
+                        <th>Cancion mas Popular</th>
+                        <th>Album Debut</th>
+                        <th>Nacionalidad</th>
+                        <th>Nacimiento</th>
+                        <th><a href="formview.php?ID=na&mode=INS">Registrar</a></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    foreach ($alumnos as $row) { ?>
+                    foreach ($artistas as $row) { ?>
                         <tr>
-                            <td><?php echo $row["CUENTA"]; ?></td>
+                            <td><?php echo $row["ID"]; ?></td>
+                            <td><?php echo $row["ARTISTA"]; ?></td>
                             <td><?php echo $row["NOMBRE"]; ?></td>
-                            <td><?php echo $row["CARRERA"]; ?></td>
-                            <td><?php echo $row["CAMPUS"]; ?></td>
-                            <td><?php echo $row["BECAS"]; ?></td>
+                            <td><?php echo $row["CANCION"]; ?></td>
+                            <td><?php echo $row["ALBUM"]; ?></td>
+                            <td><?php echo $row["NACIONALIDAD"]; ?></td>
+                            <td><?php echo $row["NACIMIENTO"]; ?></td>
                             <td>
-                                <a href="formview.php?cuenta=<?php echo $row["CUENTA"]; ?>&mode=UPD">Editar</a>&nbsp;
-                                <a href="formview.php?cuenta=<?php echo $row["CUENTA"]; ?>&mode=DSP">Consultar</a>&nbsp;
-                                <a href="formview.php?cuenta=<?php echo $row["CUENTA"]; ?>&mode=DEL">Eliminar</a>
+                                <a href="formview.php?ID=<?php echo $row["ID"]; ?>&mode=UPD">Editar</a>&nbsp;
+                                <a href="formview.php?ID=<?php echo $row["ID"]; ?>&mode=DSP">Consultar</a>&nbsp;
+                                <a href="formview.php?ID=<?php echo $row["ID"]; ?>&mode=DEL">Eliminar</a>
                             </td>
                         </tr>
                     <?php } ?>
