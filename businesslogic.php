@@ -8,8 +8,13 @@ function getRegistros(){
     return ArtistasModel::getRegistros($artistasSql);
 }
 
-function setearFiltros(){
-
+function setearFiltros($artista, $nombre, $nacionalidad){
+    $sqlSelect = "SELECT * FROM ARTISTAS 
+    WHERE ARTISTA = '%s' 
+    OR NOMBRE = '%s' 
+    OR NACIONALIDAD = '%s';";
+    $sqlSelect = sprintf($sqlSelect, $artista, $nombre, $nacionalidad);
+    return ArtistasModel::getRegistro($sqlSelect);
 }
 
 function agregaRegistro($artista, $nombre, $cancion, $album, $nacionalidad, $nacimiento)

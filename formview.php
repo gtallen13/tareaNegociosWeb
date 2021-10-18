@@ -112,12 +112,12 @@ if (isset($modeDesc[$mode])) {
                     <br />
                 <?php
                 } ?>
-                <label for="txtArtista">Artista</label><input required <?php echo $readonly; ?> type="text" name="txtArtista" id="txtArtista" value="<?php echo $txtArtista; ?>" placeholder="Nombre" /> <br />
-                <label for="txtNombre">Nombre</label><input required <?php echo $readonly; ?> type="text" name="txtNombre" id="txtNombre" value="<?php echo $txtNombre; ?>" placeholder="Nombre" /> <br />
-                <label for="txtCancion">Cancion</label><input required <?php echo $readonly; ?> type="text" name="txtCancion" id="txtCancion" value="<?php echo $txtCancion; ?>" placeholder="Carrera" /> <br />
-                <label for="txtAlbum">Album</label><input required <?php echo $readonly; ?> type="text" name="txtAlbum" id="txtAlbum" value="<?php echo $txtAlbum; ?>" placeholder="Campus" /> <br />
-                <label for="txtNacionalidad">Nacionalidad</label><input required <?php echo $readonly; ?> type="text" name="txtNacionalidad" id="txtNacionalidad" value="<?php echo $txtNacionalidad; ?>" placeholder="Becas" /> <br />
-                <label for="txtNacimiento">Nacimiento</label><input required <?php echo $readonly; ?> type="text" name="txtNacimiento" id="txtNacimiento" value="<?php echo $txtNacimiento; ?>" placeholder="Becas" /> <br />
+                <label for="txtArtista">Artista</label><input required <?php echo $readonly; ?> type="text" name="txtArtista" id="txtArtista" value="<?php echo $txtArtista; ?>" placeholder="Polache" /> <br />
+                <label for="txtNombre">Nombre</label><input required <?php echo $readonly; ?> type="text" name="txtNombre" id="txtNombre" value="<?php echo $txtNombre; ?>" placeholder="Juan Fernandez" /> <br />
+                <label for="txtCancion">Cancion</label><input required <?php echo $readonly; ?> type="text" name="txtCancion" id="txtCancion" value="<?php echo $txtCancion; ?>" placeholder="Pedazo de Mujer" /> <br />
+                <label for="txtAlbum">Album</label><input required <?php echo $readonly; ?> type="text" name="txtAlbum" id="txtAlbum" value="<?php echo $txtAlbum; ?>" placeholder="Pan sin sal" /> <br />
+                <label for="txtNacionalidad">Nacionalidad</label><input required <?php echo $readonly; ?> type="text" name="txtNacionalidad" id="txtNacionalidad" value="<?php echo $txtNacionalidad; ?>" placeholder="Hondureño" /> <br />
+                <label for="txtNacimiento">Nacimiento</label><input required <?php echo $readonly; ?> type="date" name="txtNacimiento" id="txtNacimiento" value="<?php echo $txtNacimiento; ?>" placeholder="1990-09-12" /> <br />
                 <?php
                 if ($mode != 'DSP') {
                 ?>

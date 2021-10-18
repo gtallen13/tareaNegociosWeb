@@ -5,6 +5,14 @@ $txtNombre = "";
 $txtNacionalidad = "";
 
 $artistas = getRegistros();
+$filtro = array();
+//Filtro 
+if (isset($_POST['btnFiltrar'])){
+    $txtArtista = $_POST['txtArtista'];
+    $txtNombre = $_POST['txtNombre'];
+    $txtNacionalidad = $_POST['txtNacionalidad'];
+    $filtro = setearFiltros($txtArtista, $txtNombre, $txtNacionalidad);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,9 +33,48 @@ $artistas = getRegistros();
                 <label for="txtArtista">Artista</label><input type="text" name="txtArtista" id="txtArtista" value="<?php echo $txtArtista; ?>" placeholder="Polache" /> <br />
                 <label for="txtNombre">Nombre</label><input type="text" name="txtNombre" id="txtNombre" value="<?php echo $txtNombre; ?>" placeholder="Juan Gonzales" /> <br />
                 <label for="txtNacionalidad">Nacionalidad</label><input type="text" name="txtNacionalidad" id="txtNacionalidad" value="<?php echo $txtNacionalidad; ?>" placeholder="Hondureño" /> <br />
-                <button name="btnFiltrar">Filtrar</button>
+                <button type = "submit" name="btnFiltrar">Filtrar</button>
             </form>
         </section>
+        <!-- Filtro -->
+        <section>
+            <?php if ($filtro){?>
+                <h2>Artista Filtrado</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Artista</th>
+                            <th>Nombre Real</th>
+                            <th>Cancion mas Popular</th>
+                            <th>Album Debut</th>
+                            <th>Nacionalidad</th>
+                            <th>Nacimiento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><?php echo $filtro['ID']?></td>
+                            <td><?php echo $filtro['ARTISTA']?></td>
+                            <td><?php echo $filtro['NOMBRE']?></td>
+                            <td><?php echo $filtro['CANCION']?></td>
+                            <td><?php echo $filtro['ALBUM']?></td>
+                            <td><?php echo $filtro['NACIONALIDAD']?></td>
+                            <td><?php echo $filtro['NACIMIENTO']?></td>
+
+                            <td>
+                                <a href="formview.php?ID=<?php echo $filtro["ID"]; ?>&mode=UPD">Editar</a>&nbsp;
+                                <a href="formview.php?ID=<?php echo $filtro["ID"]; ?>&mode=DSP">Consultar</a>&nbsp;
+                                <a href="formview.php?ID=<?php echo $filtro["ID"]; ?>&mode=DEL">Eliminar</a>  
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+               <?php } else echo "<h2></h2>";?>
+
+        </section>
+
+        <!-- Artistas -->
         <section>
             <h2>Artistas</h2>
             <table>
