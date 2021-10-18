@@ -44,13 +44,14 @@ function actualizarRegistro(
         where ID = '%s';"
     ;
     $sqlUpdate = sprintf(
-        $sqlInsert,
+        $sqlUpdate,
         $artista, 
         $nombre, 
         $cancion, 
         $album, 
         $nacionalidad, 
         $nacimiento,
+        $ID
     );
 
     return ArtistasModel::executeNonQuery($sqlUpdate);
@@ -71,12 +72,8 @@ function obtenerRegistro($ID)
 function eliminarRegistro($ID) 
 {
     $sqlDelete = "DELETE FROM ARTISTAS where ID='%s';";
-    return ArtistasModel::executeNonQuery(
-        sprintf(
-            $sqlstr,
-            $ID
-        )
-    );
+    $sqlDelete = sprintf($sqlDelete,$ID);
+    return ArtistasModel::executeNonQuery($sqlDelete);
 }
 
 function incializarTabla() {
